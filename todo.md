@@ -1,0 +1,1 @@
+- Change the inputs in the command to chain `.then`'s
