@@ -1,0 +1,17 @@
+{
+    "criteria": {
+          "trigger": {
+               "trigger": "minecraft:tick"
+          }
+     },
+    "display": {
+        "title": "<author>",
+        "icon": {
+            "item": "minecraft:player_head",
+            "nbt": "{SkullOwner:'<author>'}"
+        },
+        "show_toast": false,
+        "announce_to_chat": false,
+    },
+    "parent": "global:root"
+}

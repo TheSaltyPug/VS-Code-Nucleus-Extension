@@ -24,14 +24,14 @@ function run(uri){
     //     curDir = path.dirname(filepath);
     // }
 
-    let author;
-    let dname;
-    let namespace;
-    let projname;
-    let item;
-    let desc;
-    let mainName;
-    let loadName;
+    let author; // datapack author. Used in the global advancement
+    let dname; //  datapack name. Used in global advancement, mcmeta file, and root folder
+    let namespace; // main folder name. namespace:projname/filename
+    let projname; // project name. namespace:projname/filename
+    let item;   // datapack item used in the global advancement
+    let desc;   // datapack description. Used in global advancment and mcmeta file.
+    let mainName; // name of the function that is run every tick. namespace:projname/mainName
+    let loadName; // name of the function that is run on load. namespace:projname/loadName
 
     // input data from the user
     author = vscode.window.showInputBox({

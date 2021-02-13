@@ -1,0 +1,17 @@
+{
+     "criteria": {
+          "trigger": {
+               "trigger": "minecraft:tick"
+          }
+     },
+     "display": {
+          "announce_to_chat": false,
+          "description": "<desc>",
+          "icon": {
+               "item": "minecraft:<item>"
+          },
+          "show_toast": false,
+          "title": "<dname>"
+     },
+     "parent": "global:<namespace>"
+}
