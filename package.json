@@ -16,8 +16,8 @@
 	"contributes": {
 		"commands": [
 			{
-				"command": "nucleus.helloWorld",
-				"title": "Hello World"
+				"command": "nucleus.create",
+				"title": "Create Datapack"
 			}
 		]
 	},
