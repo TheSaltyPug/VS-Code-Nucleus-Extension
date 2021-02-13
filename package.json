@@ -10,7 +10,7 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:nucleus.helloWorld"
+		"onCommand:nucleus.create"
 	],
 	"main": "./extension.js",
 	"contributes": {

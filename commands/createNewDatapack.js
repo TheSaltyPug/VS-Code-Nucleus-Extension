@@ -60,23 +60,42 @@ function run(uri){
         })
         }
     )
-    item = vscode.window.showInputBox({
-        prompt: 'Please enter the id of the item that will be displayed in the advancement:',
-        // validateInput: value => {}
-    })
-    desc = vscode.window.showInputBox({
-        prompt: 'Please enter the datapack description:',
-        // validateInput: value => {}
-    })
-    mainName = vscode.window.showInputBox({
-        prompt: 'Please enter the name of the main function:',
-        value: 'main',
-        // validateInput: value => {}
-    })
-    loadName = vscode.window.showInputBox({
-        prompt: 'Please enter the name of the load function:',
-        value: 'setup',
-        // validateInput: value => {}
+    projname.then( () => {
+        item = vscode.window.showInputBox({
+           prompt: 'Please enter the id of the item that will be displayed in the advancement:',
+           // validateInput: value => {}
+        })
+        }
+    )
+    item.then(() => {
+        desc = vscode.window.showInputBox({
+            prompt: 'Please enter the datapack description:',
+           // validateInput: value => {}
+        })
+        }
+    )
+    desc.then(() => {
+        mainName = vscode.window.showInputBox({
+            prompt: 'Please enter the name of the main function:',
+            value: 'main',
+            // validateInput: value => {}
+        })
+        }
+    )
+    mainName.then( () => {
+        loadName = vscode.window.showInputBox({
+            prompt: 'Please enter the name of the load function:',
+            value: 'setup',
+            // validateInput: value => {}
+        })
+        }
+    )
+
+    // start generation
+    loadName.then( () => {
+        //
+        console.log("stuff");
+
     })
 
 }
