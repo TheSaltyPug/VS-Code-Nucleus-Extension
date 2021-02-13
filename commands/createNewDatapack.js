@@ -3,6 +3,7 @@ const vscode = require('vscode');   // vscode
 const fs = require('fs');           // filesystem
 const path = require('path');       // path
 const Extension = require('../extension'); // our extension
+const { get } = require('http');
 
 // Messages for ease of access
 const ABORT_CREATE = 'Aborted datapack generation';
@@ -10,7 +11,15 @@ const ABORT_STRUCTURE = 'Aborted datapack generation';
 const FAILED = 'Failed to generate datapack';
 const SUCCESS = 'Successfully created new datapack!';
 
-function run(uri){
+function getData(prompt, defaul="")
+{
+    return vscode.window.showInputBox({
+        prompt: prompt,
+        value: defaul
+    })
+}
+
+async function run(uri){
     vscode.window.showInformationMessage('Datapack generation from Nucleus!');
     // // check that the path exists
     // if (uri === undefined){
@@ -24,79 +33,22 @@ function run(uri){
     //     curDir = path.dirname(filepath);
     // }
 
-    let author; // datapack author. Used in the global advancement
-    let dname; //  datapack name. Used in global advancement, mcmeta file, and root folder
-    let namespace; // main folder name. namespace:projname/filename
-    let projname; // project name. namespace:projname/filename
-    let item;   // datapack item used in the global advancement
-    let desc;   // datapack description. Used in global advancment and mcmeta file.
-    let mainName; // name of the function that is run every tick. namespace:projname/mainName
-    let loadName; // name of the function that is run on load. namespace:projname/loadName
+    // grab some settings beforehand so we can do conditions on them
+    // for example, settingNamespace is used to set the namespace to author if it is undefined
+    let settingNamespace = vscode.workspace.getConfiguration('nucleus')['namespace'];
 
     // input data from the user
-    author = vscode.window.showInputBox({
-        prompt: 'Please enter your Minecraft username:',
-        // value: vscode.workspace.getConfiguration('nucleus.author'),
-        // validateInput: value => {}
-    })
-    author.then( () => {
-        dname = vscode.window.showInputBox({
-            prompt: 'Please enter your datapack name:',
-            // validateInput: value => {}
-        })
-        }
-    )
-    dname.then( () => {
-        namespace = vscode.window.showInputBox({
-            prompt: 'Please enter your datapack namespace:',
-            // validateInput: value => {}
-        })
-        }
-    )
-    namespace.then( () => {
-        projname = vscode.window.showInputBox({
-            prompt: 'Please enter the project name:',
-            // validateInput: value => {}
-        })
-        }
-    )
-    projname.then( () => {
-        item = vscode.window.showInputBox({
-           prompt: 'Please enter the id of the item that will be displayed in the advancement:',
-           // validateInput: value => {}
-        })
-        }
-    )
-    item.then(() => {
-        desc = vscode.window.showInputBox({
-            prompt: 'Please enter the datapack description:',
-           // validateInput: value => {}
-        })
-        }
-    )
-    desc.then(() => {
-        mainName = vscode.window.showInputBox({
-            prompt: 'Please enter the name of the main function:',
-            value: 'main',
-            // validateInput: value => {}
-        })
-        }
-    )
-    mainName.then( () => {
-        loadName = vscode.window.showInputBox({
-            prompt: 'Please enter the name of the load function:',
-            value: 'setup',
-            // validateInput: value => {}
-        })
-        }
-    )
+    let author = await getData("Please enter your Minecraft username:", vscode.workspace.getConfiguration('nucleus')['author']); // datapack author. Used in the global advancement
+    let dname = await getData("Please enter the datapack name:"); //  datapack name. Used in global advancement, mcmeta file, and root folder
+    let namespace = await getData("Please enter the namespace:", ((typeof(settingNamespace) == 'undefined') ? author : vscode.workspace.getConfiguration('nucleus')['namespace'])); // main folder name. namespace:projname/filename
+    let projname = await getData("Please enter the project name:"); // project name. namespace:projname/filename
+    let item = await getData("Please enter the item id for the datapack advancement:","name_tag");   // datapack item used in the global advancement
+    let desc = await getData("Please enter the datapack description:");   // datapack description. Used in global advancment and mcmeta file.
+    let mainName = await getData("Please enter the name of the main function:","main"); // name of the function that is run every tick. namespace:projname/mainName
+    let loadName = await getData("Please enter the name of the setup function:","setup"); // name of the function that is run on load. namespace:projname/loadName
+
 
     // start generation
-    loadName.then( () => {
-        //
-        console.log("stuff");
-
-    })
 
 }
 
